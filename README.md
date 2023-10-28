@@ -17,6 +17,10 @@ Details
 - Icon Theme: Tela Circle Blue Dark
 - Font: MesloLGS NF
 
+The shell scripts will need to be added to your path. For me I placed them in the directory ~/.local/bin.
+All of these addons are publicly available on Github. The changes I made were mainly to their styling to change colours. 
+The Arch wiki does a really good job documenting how to configure them. I mainly used that for troubleshooting. 
+
 ![image](https://github.com/John-Ling/dotfiles/assets/100111224/8eb121f7-e6c7-45a7-be22-c6ccb458b688)
 
 ![image](https://github.com/John-Ling/dotfiles/assets/100111224/f418b1bd-8c48-4029-bf59-53a5d20a5eff)
