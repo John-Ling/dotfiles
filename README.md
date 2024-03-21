@@ -9,12 +9,12 @@ Details
 - File Manager: Dolphin
 - App Launcher and Powermenu: Rofi
 - Taskbar: Waybar
-- Audio: Pipewire w/ SwayOSD for control
+- Audio: Pipewire w/ SwayOSD
 - Hyprland Plugins: Virtual Desktop
 - Screenshots: Grim
-- GTK Theme: Materia Dark
+- GTK Theme: Fluent Dark
 - Kvantum Theme: Gnome Dark
-- Icon Theme: Tela Circle Blue Dark
+- Icon Theme: Tela Circle Standard
 - Font: MesloLGS NF
 
 The shell scripts will need to be added to your path. For me I placed them in the directory ~/.local/bin.
