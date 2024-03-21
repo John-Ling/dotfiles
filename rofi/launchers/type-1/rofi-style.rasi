@@ -11,8 +11,8 @@
 configuration {
 	modi: "drun,run,filebrowser";
 	show-icons: true;
-	icon-theme: "Tela-circle";
-	display-drun:               " Apps";
+	icon-theme: "tela-circle";
+	display-drun:               "Launch";
 	display-run:                " Run";
 	display-filebrowser:        " Files"; 
 	display-window:             " Windows"; 

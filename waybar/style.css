@@ -1,7 +1,7 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     /*font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;*/
-    font-family: MesloLGS NF, FontAwesome;
+    font-family: MesloLGS NF;
     font-size: 13px;
     padding: 3px;
 }
@@ -105,8 +105,8 @@ button:hover {
 }
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #000000;
+    background-color: #aedf70;
 }
 
 @keyframes blink {
