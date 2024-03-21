@@ -16,6 +16,8 @@ Details
 - Kvantum Theme: Gnome Dark
 - Icon Theme: Tela Circle Standard
 - Font: MesloLGS NF
+- Wallpaper: Hyprpaper
+- Automatic Sleep: Hypridle
 
 The shell scripts will need to be added to your path. For me I placed them in the directory ~/.local/bin.
 All of these addons are publicly available on Github. The changes I made were mainly to their styling to change colours. 
