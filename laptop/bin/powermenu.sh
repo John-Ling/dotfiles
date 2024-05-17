@@ -54,7 +54,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
+	echo -e "$lock\n$logout\n$shutdown\n$reboot\n$suspend" | rofi_cmd
 }
 
 # Execute Command
@@ -66,13 +66,13 @@ run_cmd() {
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
 		elif [[ $1 == '--suspend' ]]; then
-			mpc -q pause
-			amixer set Master mute
+			#mpc -q pause
+			#amixer set Master mute
 			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
-			hyprctl dispatch exit			
+			killall -9 Hyprland
 		elif [[ $1 == '--lock' ]]; then
-			lock.sh
+			hyprlock
 		fi
 	else
 		exit 0
@@ -89,7 +89,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-		lock.sh
+		run_cmd --lock
         ;;
     $suspend)
 		run_cmd --suspend
