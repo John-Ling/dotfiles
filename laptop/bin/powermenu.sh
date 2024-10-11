@@ -59,6 +59,11 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
+	if [[ $1 == '--lock' ]]; then
+		pidof hyprlock || hyprlock
+		exit 0
+	fi
+
 	selected="$(confirm_exit)"
 	if [[ "$selected" == "$yes" ]]; then
 		if [[ $1 == '--shutdown' ]]; then
@@ -71,8 +76,6 @@ run_cmd() {
 			systemctl suspend
 		elif [[ $1 == '--logout' ]]; then
 			killall -9 Hyprland
-		elif [[ $1 == '--lock' ]]; then
-			hyprlock
 		fi
 	else
 		exit 0
