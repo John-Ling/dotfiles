@@ -1,5 +1,4 @@
-# dotfiles
-Dotfiles for my Linux desktop.
+# Dotfiles
 
 Details
 - Distro: Arch btw
@@ -10,8 +9,7 @@ Details
 - App Launcher and Powermenu: Rofi
 - Taskbar: Waybar
 - Audio: Pipewire w/ SwayOSD
-- Hyprland Plugins: Virtual Desktop
-- Screenshots: Grim
+- Screenshots: Grimblast
 - GTK Theme: Fluent Dark
 - Kvantum Theme: Gnome Dark
 - Icon Theme: Tela Circle Standard
@@ -19,18 +17,20 @@ Details
 - Wallpaper: Hyprpaper
 - Automatic Sleep: Hypridle
 
-The shell scripts will need to be added to your path. For me I placed them in the directory ~/.local/bin.
-All of these addons are publicly available on Github. The changes I made were mainly to their styling to change colours. 
-The Arch wiki does a really good job documenting how to configure them. I mainly used that for troubleshooting. 
+The shell scripts will need to be added to your path. I placed them in the directory ~/.local/bin.
+Configuring Hyprland is incredibly easy. I pretty much used only the Hyprland wiki and everything was good.
 
-![image](https://github.com/John-Ling/dotfiles/assets/100111224/8eb121f7-e6c7-45a7-be22-c6ccb458b688)
+Everything used is on Github so go to their repos to figure out more details for configurations. 
+While I made a few changes, the changes I made were mainly to their styling to change colours.
 
-![image](https://github.com/John-Ling/dotfiles/assets/100111224/f418b1bd-8c48-4029-bf59-53a5d20a5eff)
+![image](https://github.com/user-attachments/assets/8bb19015-5c6f-4c5e-a1fc-c99a548f1cb5)
 
-![image](https://github.com/John-Ling/dotfiles/assets/100111224/f3248002-9c27-4cb5-9791-441cbec16437)
+![image](https://github.com/user-attachments/assets/6bb57b02-1981-4591-aafa-d66a18420b6e)
 
-![image](https://github.com/John-Ling/dotfiles/assets/100111224/57921753-25fc-4a13-89d5-78554e83adf6)
+![image](https://github.com/user-attachments/assets/ed00aed1-debf-4867-b23b-9aa2e92926f4)
 
-![image](https://github.com/John-Ling/dotfiles/assets/100111224/b6e0fcbf-9039-4c5d-a4fc-66b54652440e)
+![image](https://github.com/user-attachments/assets/923cad95-0ea7-48ac-930f-41e0ef32f220)
 
-![image](https://github.com/John-Ling/dotfiles/assets/100111224/74b16531-4c49-4014-b847-7e491897deee)
+![image](https://github.com/user-attachments/assets/4fd69f11-5179-484c-9d31-4a8ea40b09db)
+
+![image](https://github.com/user-attachments/assets/1c4b6b86-bf94-404b-ae68-077fa863a66f)
