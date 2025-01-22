@@ -1,0 +1,108 @@
+{
+    "height": 35, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+    "modules-left": ["clock"],
+    "modules-center": [],
+    "modules-right": ["temperature", "cpu", "memory", "pulseaudio", "network", "battery"],
+    // Modules configuration
+    "clock": {
+        "format": "{:%I:%M %p - %a %d %b %G}",
+	"tooltip": false
+    },
+    "cpu": {
+        "format": "CPU: {usage}%",
+        "tooltip": false,
+        "interval": 3
+    },
+    "memory": {
+        "format": "RAM: {used:0.1f}GiB",
+	"tooltip": false,
+        "interval": 6
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+        "critical-threshold": 80,
+	    "interval": 4,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""],
+	"tooltip": false
+    },
+    "network": {
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
+        "format-linked": "{ifname} NO IP",
+        "format-disconnected": "DISCONNECTED",
+	"tooltip": false
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% ",
+        "format-bluetooth-muted": "MUTE ",
+        "format-muted": "MUTE",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "", 
+            "car": "",
+            "default": ""
+        }
+    },
+    "battery": {
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-charging": " {capacity}% ",
+        "format-plugged": " {capacity}% ",        
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "hyprland/workspaces": {
+	  "format": "{icon}",
+	  "on-click": "",
+	  "format-icons": {
+	    "urgent": "!",
+	    "active": "",
+	    "default": ""
+	  },
+	  "sort-by-number": true
+    },
+    "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "interval": 10,
+    "consume-icons": {
+        "on": " " // Icon shows only when "consume" is on
+    },
+    "random-icons": {
+        "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+        "on": " "
+    },
+    "repeat-icons": {
+        "on": " "
+    },
+    "single-icons": {
+        "on": "1 "
+    },
+    "state-icons": {
+        "paused": "",
+        "playing": ""
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+}
+}
+}
+
