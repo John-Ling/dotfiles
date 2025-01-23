@@ -21,7 +21,7 @@ host=`hostname`
 shutdown=' Shutdown'
 reboot=' Reboot'
 lock=' Lock'
-suspend=' Suspend'
+hibernate=' Hibernate'
 logout=' Logout'
 yes='Yes'
 no='No'
@@ -54,7 +54,7 @@ confirm_exit() {
 
 # Pass variables to rofi dmenu
 run_rofi() {
-	echo -e "$lock\n$logout\n$shutdown\n$reboot\n$suspend" | rofi_cmd
+	echo -e "$lock\n$logout\n$shutdown\n$reboot\n$hibernate" | rofi_cmd
 }
 
 # Execute Command
@@ -70,12 +70,12 @@ run_cmd() {
 			systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
-		elif [[ $1 == '--suspend' ]]; then
+		elif [[ $1 == '--hibernate' ]]; then
 			#mpc -q pause
 			#amixer set Master mute
-			systemctl suspend
+			systemctl hibernate
 		elif [[ $1 == '--logout' ]]; then
-			killall -9 Hyprland
+            hyprctl dispatch exit
 		fi
 	else
 		exit 0
@@ -94,8 +94,8 @@ case ${chosen} in
     $lock)
 		run_cmd --lock
         ;;
-    $suspend)
-		run_cmd --suspend
+    $hibernate)
+		run_cmd --hibernate
         ;;
     $logout)
 		run_cmd --logout
