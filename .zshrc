@@ -5,6 +5,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
@@ -37,6 +44,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
+
+zstyle ':omz:plugins:nvm' lazy yes
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -77,11 +86,12 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git nvm zsh-syntax-highlighting poetry)
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+#
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -110,7 +120,44 @@ source $ZSH/oh-my-zsh.sh
 alias gcc="gcc -Wall -Wextra -Wpedantic"
 alias remove-orphans="sudo pacman -Qdtq | sudo pacman -Rns -"
 alias governor="cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+alias performance="sudo cpupower frequency-set -g performance"
+alias powersave="sudo cpupower frequency-set -g schedutil"
+alias setip="~/.local/bin/set_ip.sh"
+alias getip="~/.local/bin/get_ip.sh"
+alias blue="hyprctl hyprsunset identity"
+alias noblue="hyprctl hyprsunset temperature 2500"
+alias set-colour="sudo liquidctl set ring color fixed ff2e00 && sudo liquidctl set ring color off"
+alias l="ls"
+alias gdb="gdb --tui"
+alias yay="yay --answerclean None --answerdiff None"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#source ~/.zsh_nvm.sh
+
+#
+# history config
+#
+
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+#source /usr/share/nvm/init-nvm.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /usr/share/nvm/init-nvm.sh
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - zsh)"
