@@ -8,5 +8,6 @@
  **/
 
 * {
-    font: "MesloLGS NF 9";
+    font: "CaskaydiaMono Nerd Font 9";
+    /*font: "MesloLGS NF 9";*/
 }
