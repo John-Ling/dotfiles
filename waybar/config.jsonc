@@ -1,23 +1,34 @@
 {
-    "height": 35, // Waybar height (to be removed for auto height)
+    "height": 26, // Waybar height (to be removed for auto height)
     "spacing": 4, // Gaps between modules (4px)
-    "modules-left": ["clock"],
-    "modules-center": [],
-    "modules-right": ["temperature", "cpu", "memory", "pulseaudio", "network", "battery"],
+    "modules-left": ["custom/pomodoro"],
+    "output": ["LVDS-1"],
+    "modules-center": ["clock"],
+    "modules-right": ["temperature", "cpu", "memory","pulseaudio", "network", "battery"],
     // Modules configuration
     "clock": {
         "format": "{:%I:%M %p - %a %d %b %G}",
 	"tooltip": false
     },
     "cpu": {
-        "format": "CPU: {usage}%",
+        "format": "  {usage}%",
         "tooltip": false,
         "interval": 3
     },
     "memory": {
-        "format": "RAM: {used:0.1f}GiB",
+        "format": "  {used:0.1f}GiB",
 	"tooltip": false,
         "interval": 6
+    },
+    "disk": {
+        "interval": 6,
+        "format": "DISK: {specific_free:0.2f} GiB",
+        "unit": "GiB"
+    },
+    "custom/now-playing": {
+        "exec": "playerctl --player=spotify metadata title",
+        "format": "{}",
+        "interval": 1
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -30,28 +41,41 @@
 	"tooltip": false
     },
     "network": {
-        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-wifi": "{icon} {essid}",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
         "format-linked": "{ifname} NO IP",
         "format-disconnected": "DISCONNECTED",
+        "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
 	"tooltip": false
+    },
+    "custom/stopwatch": {
+        "exec": "$HOME/.local/bin/stopwatch start",
+        "format": "start",
+        "interval": 1,
+        "return-type": "json",
+        "on-click": "$HOME/.local/bin/stopwatch restart"
+    },
+    "custom/logo": {
+        "format": "󰣇"
+    },
+    "custom/pomodoro": {
+    	"format": "{}",
+    	"return-type": "json",
+    	"exec": "$HOME/.local/bin/waybar-module-pomodoro --no-icons --work-icon WORK --break-icon REST",
+    	"on-click": "$HOME/.local/bin/waybar-module-pomodoro toggle",
+    	"on-click-right": "$HOME/.local/bin/waybar-module-pomodoro reset"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%",
+       "format": "{icon} {volume}%",
         "format-bluetooth": "{icon} {volume}% ",
         "format-bluetooth-muted": "MUTE ",
-        "format-muted": "MUTE",
+        "format-muted": "󰝟 MUTE",
         "format-source": "",
+        "tooltip-format": "Playing at {volume}%",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "", 
-            "car": "",
-            "default": ""
+              "default": ["󰕿", "󰖀", "󰕾", "󰕾"]
         }
     },
     "battery": {
@@ -61,24 +85,47 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-full": "{icon} {capacity}%",
-        "format-charging": " {capacity}% ",
-        "format-plugged": " {capacity}% ",        
+        "format-charging": " {capacity}%",
+        "format-plugged": "{icon} {capcity}%",     
+        "interval": 1,   
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        
+        "format-icons": ["", "", "", "",""],
+        "tooltip-format-discharging": "Remaining: {time}",
+        "tooltip-format-charging": "To Full: {time}"
     },
     "hyprland/workspaces": {
-	  "format": "{icon}",
-	  "on-click": "",
-	  "format-icons": {
-	    "urgent": "!",
-	    "active": "",
-	    "default": ""
-	  },
-	  "sort-by-number": true
+        "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "active": "󱓻"
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": []
+    }
+    },
+    "hyprland/window": {
+        "format": "{title:.80s}",
+        "rewrite": {
+            "(.*) - (.*)": "$1",
+            "(.*) — Mozilla Firefox": "$1"
+        }
     },
     "mpd": {
+    "port": 6600,
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
     "format-disconnected": "Disconnected ",
     "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
@@ -92,7 +139,7 @@
     },
     "repeat-icons": {
         "on": " "
-    },
+    ,
     "single-icons": {
         "on": "1 "
     },
