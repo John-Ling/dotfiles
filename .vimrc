@@ -11,5 +11,5 @@ set nobackup
 set nowrap
 set hlsearch
 set showmatch
-nnoremap <C-@> :call system("wl-copy", @")<CR>
-
+set relativenumber
+autocmd TextYankPost * call system('wl-copy', join(v:event.regcontents, "\n"))
