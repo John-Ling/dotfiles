@@ -8,7 +8,11 @@
     // Modules configuration
     "clock": {
         "format": "{:%I:%M %p - %a %d %b %G}",
-	"tooltip": false
+        "tooltip": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month"
+    }
     },
     "cpu": {
         "format": "  {usage}%",
@@ -46,7 +50,9 @@
         "format-linked": "{ifname} NO IP",
         "format-disconnected": "DISCONNECTED",
         "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
-	"tooltip": false
+        "tooltip": true,
+        "tooltip-format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{ipaddr}/{cidr}"
     },
     "custom/stopwatch": {
         "exec": "$HOME/.local/bin/stopwatch start",
@@ -84,6 +90,7 @@
             "warning": 30,
             "critical": 15
         },
+        "tooltip": true,
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
         "format-plugged": "{icon} {capcity}%",     
