@@ -13,3 +13,4 @@ set hlsearch
 set showmatch
 set relativenumber
 autocmd TextYankPost * call system('wl-copy', join(v:event.regcontents, "\n"))
+set background=dark
