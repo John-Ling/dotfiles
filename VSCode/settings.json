@@ -1,0 +1,80 @@
+{
+    "window.commandCenter": false,
+    "window.titleBarStyle": "native",
+    "workbench.layoutControl.enabled": false,
+    "editor.fontFamily": "CaskaydiaMono Nerd Font",
+    "terminal.integrated.fontFamily": "CaskaydiaMono Nerd Font",
+    "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-dark",
+    "files.simpleDialog.enable": true,
+    "cSpell.userWords": [
+        "colour",
+        "colours",
+        "neighbourhood"
+    ],
+    "cSpell.language": "en,en-GB",
+    "[typescriptreact]": {
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "[javascriptreact]": {
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editortabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "explorer.confirmDelete": false,
+    "explorer.confirmPasteNative": false,
+    "workbench.sideBar.location": "right",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[astro]": {
+        "editor.tabSize": 2
+    },
+    "explorer.confirmDragAndDrop": false,
+    "editor.fontSize": 13,
+    "markdown.preview.fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-seri",
+    "workbench.settings.applyToAllProfiles": [],
+    "vim.handleKeys": {
+        "<C-p>": false,
+        "<C-b>": false,
+        "<C-w>": false,
+        "<C-j>": false,
+        "<C-x>": false,
+        "<C-y>": false,
+        "<C-c>": false
+    },
+    "vim.startInInsertMode": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "extensions.ignoreRecommendations": true,
+    "vim.vimrc.enable": true,
+    "vim.useSystemClipboard": true,
+    "editor.indentSize": "tabSize",
+    "comments.openView": "never",
+    "claudeCode.preferredLocation": "panel",
+    "[json]": {
+        "editor.tabSize": 2
+    },
+    "[jsonc]": {
+        "editor.tabSize": 2
+    },
+    "[jsonl]": {
+        "editor.tabSize": 2
+    },
+    "workbench.colorTheme": "Alabaster Dark",
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "vim.vimrc.path": "$HOME/.vimrc",
+    "editor.lineNumbers": "relative",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "editor.formatOnSave": true
+}
