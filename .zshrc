@@ -1,3 +1,5 @@
+ typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -86,7 +88,7 @@ zstyle ':omz:plugins:nvm' lazy yes
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git nvm zsh-syntax-highlighting poetry)
+plugins=(git nvm poetry zsh-syntax-highlighting )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -117,22 +119,29 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias gcc="gcc -fno-stack-protector"
+
+alias vim="nvim"
+alias open="xdg-open"
+alias obsidian-open="xdg-open 'obsidian://open?path=$(pwd)'"
+alias tmp="nvim /tmp/$(date | sed 's/ //g;s/\\.//g').md"
 alias gcc="gcc -Wall -Wextra -Wpedantic"
 alias remove-orphans="sudo pacman -Qdtq | sudo pacman -Rns -"
 alias governor="cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
 alias performance="sudo cpupower frequency-set -g performance"
 alias powersave="sudo cpupower frequency-set -g schedutil"
-alias setip="~/.local/bin/set_ip.sh"
-alias getip="~/.local/bin/get_ip.sh"
-alias blue="hyprctl hyprsunset identity"
-alias noblue="hyprctl hyprsunset temperature 2500"
-alias set-colour="sudo liquidctl set ring color fixed ff2e00 && sudo liquidctl set ring color off"
+alias blue="hyprctl hyprsunset identity > /dev/null"
+alias noblue="hyprctl hyprsunset temperature 2500 > /dev/null"
+alias set-colour="sudo liquidctl set logo color fixed FF2200 && sudo liquidctl set ring color off"
 alias l="ls"
 alias gdb="gdb --tui"
 alias yay="yay --answerclean None --answerdiff None"
+alias vpn-up="sudo wg-quick up wg0"
+alias vpn-down="sudo wg-quick down wg0"
+alias tkill="tmux kill-server"
+alias tstart='for i in {1..5}; do tmux new-session -d -s "$(generate_name)"; done && tmux attach'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-#source ~/.zsh_nvm.sh
 
 #
 # history config
@@ -154,6 +163,9 @@ setopt hist_find_no_dups
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# bun completions
+[ -s "/home/john/.bun/_bun" ] && source "/home/john/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
