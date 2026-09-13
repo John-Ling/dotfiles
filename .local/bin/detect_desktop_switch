@@ -1,0 +1,11 @@
+#!/bin/bash
+. ~/.local/state/currentDesktop.var
+currentDesktop=${currentDesktop}
+echo $currentDesktop
+
+inotifywait -mq -e close_write --format '%w%f' ~/.local/state/currentDesktop.var | while read -r 
+do
+	. ~/.local/state/currentDesktop.var
+	currentDesktop=${currentDesktop}
+	echo $currentDesktop
+done

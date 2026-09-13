@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+STATE_DIRECTORY="${XDG_RUNTIME_DIR:?XDG_RUNTIME_DIR not set}/waybar-counter"
+STATE_FILE="$STATE_DIRECTORY/state"
+mkdir -p "$STATE_DIRECTORY"
+echo "idle" > "$STATE_FILE"
+
+LOCK_FILE="/tmp/waybar-counter-state.lock"
+touch "$LOCK_FILE"
+
+set_state() {
+	local state=$1
+	{
+		flock -x 200
+		printf '%s\n' "$state" > "$STATE_FILE"
+	} 200>"$LOCK_FILE"
+}
+
+get_state() {
+	{
+		flock -x 200
+		cat "$STATE_FILE"
+	} 200>"$LOCK_FILE"
+}
+
+formatted_print() {
+	local seconds=$1
+	printf "%02d:%02d:%02d\n" $((seconds/3600)) $((seconds%3600/60)) $((seconds%60))
+}
+
+SOCKET_DIRECTORY="/run/user/$(id -u)"
+SOCKET_PATH="$SOCKET_DIRECTORY/waybar_counter.sock"
+mkdir -p "$SOCKET_DIRECTORY"
+
+#
+#         toggle             toggle
+# idle ---------> running <-------> paused
+#  ^-----------------|----------------|
+#        reset
+#
+
+echo " WORK "
+
+socat -U - UNIX-LISTEN:"$SOCKET_PATH",unlink-early=1,unlink-close=1,fork | while read -r line; do
+	case "$line" in
+		"toggle")
+			state=$(get_state)
+			if [[ "$state" == "idle" ]]; then
+				set_state "running"			
+				state=$(get_state)	
+				elapsed=0
+				(
+					while [[ "$state" != "idle" ]] do
+						if [[ "$state" == "running" ]]; then
+							elapsed=$((elapsed + 1))
+							formatted_print "$elapsed"
+							sleep 1
+						else
+							sleep 0.1
+						fi
+						state=$(get_state)
+					done
+				) &
+				continue
+			fi
+	
+			updated_state=$([[ "$state" == "running" ]] && echo "paused" || echo "running")
+			set_state "$updated_state"
+			;;
+		"reset")
+			state=$(get_state)
+			if [[ "$state" == "idle" ]]; then
+				continue
+			fi
+		
+			set_state "idle"		
+			echo " WORK "
+			;;
+	esac
+done
+

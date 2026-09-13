@@ -1,7 +1,7 @@
 {
-    "height": 26, // Waybar height (to be removed for auto height)
+    "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 4, // Gaps between modules (4px)
-    "modules-left": ["custom/pomodoro"],
+    "modules-left": ["custom/current-desktop", "custom/counter"],
     "output": ["LVDS-1"],
     "modules-center": ["clock"],
     "modules-right": ["temperature", "cpu", "memory","pulseaudio", "network", "battery"],
@@ -14,6 +14,7 @@
       "mode": "month"
     }
     },
+
     "cpu": {
         "format": "  {usage}%",
         "tooltip": false,
@@ -45,7 +46,7 @@
 	"tooltip": false
     },
     "network": {
-        "format-wifi": "{icon} {essid}",
+        "format-wifi": "{icon}  {essid}",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
         "format-linked": "{ifname} NO IP",
         "format-disconnected": "DISCONNECTED",
@@ -64,6 +65,19 @@
     "custom/logo": {
         "format": "󰣇"
     },
+
+	"custom/current-desktop": {
+		"format": "{}",
+		"exec": "$HOME/.local/bin/detect_desktop_switch",
+		"tooltip": false
+	},
+	"custom/counter": {
+		"format": "{}",
+		"exec": "$HOME/.local/bin/waybar_counter",
+		"on-click": "echo 'toggle' | socat - UNIX-CONNECT:/run/user/$(id -u)/waybar_counter.sock", 
+		"on-click-right": "echo 'reset' | socat - UNIX-CONNECT:/run/user/$(id -u)/waybar_counter.sock",
+		"tooltip": false
+	},
     "custom/pomodoro": {
     	"format": "{}",
     	"return-type": "json",
@@ -93,11 +107,8 @@
         "tooltip": true,
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
-        "format-plugged": "{icon} {capcity}%",     
-        "interval": 1,   
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        
+        "format-plugged": "{icon} {capacity}%",     
+		"interval": 1,
         "format-icons": ["", "", "", "",""],
         "tooltip-format-discharging": "Remaining: {time}",
         "tooltip-format-charging": "To Full: {time}"
