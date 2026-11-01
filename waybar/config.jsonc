@@ -2,7 +2,7 @@
     "height": 24, // Waybar height (to be removed for auto height)
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["custom/current-desktop", "custom/counter"],
-    "output": ["LVDS-1"],
+    "output": ["DP-3"],
     "modules-center": ["clock"],
     "modules-right": ["temperature", "cpu", "memory","pulseaudio", "network", "battery"],
     // Modules configuration
@@ -10,9 +10,24 @@
         "format": "{:%I:%M %p - %a %d %b %G}",
         "tooltip": true,
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "mode": "month"
-    }
+		 "calendar": {
+	        "mode"          : "year",
+        	"mode-mon-col"  : 3,
+	        "weeks-pos"     : "right",
+	        "on-scroll"     : 1,
+	        "format": {
+    	        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        	    "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+	            "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+	            "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+    	        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+	        }
+	    },
+    	"actions":  {
+        	"on-click-right": "mode",
+	        "on-scroll-up": "shift_up",
+    	    "on-scroll-down": "shift_down"
+	   	 }
     },
 
     "cpu": {
@@ -46,7 +61,7 @@
 	"tooltip": false
     },
     "network": {
-        "format-wifi": "{icon}  {essid}",
+        "format-wifi": "{icon} {essid}",
         "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
         "format-linked": "{ifname} NO IP",
         "format-disconnected": "DISCONNECTED",
@@ -78,13 +93,6 @@
 		"on-click-right": "echo 'reset' | socat - UNIX-CONNECT:/run/user/$(id -u)/waybar_counter.sock",
 		"tooltip": false
 	},
-    "custom/pomodoro": {
-    	"format": "{}",
-    	"return-type": "json",
-    	"exec": "$HOME/.local/bin/waybar-module-pomodoro --no-icons --work-icon WORK --break-icon REST",
-    	"on-click": "$HOME/.local/bin/waybar-module-pomodoro toggle",
-    	"on-click-right": "$HOME/.local/bin/waybar-module-pomodoro reset"
-    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
        "format": "{icon} {volume}%",
