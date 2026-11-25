@@ -19,6 +19,7 @@ then
 fi
 
 nextDesktop=$((currentDesktop+$1))
+echo currentDesktop=$((nextDesktop)) > ~/.local/state/currentDesktop.var
 
 # determine which monitor is currently focused
 # to figure out which order to switch workspaces
@@ -27,22 +28,21 @@ nextDesktop=$((currentDesktop+$1))
 workspaceId=$(hyprctl activeworkspace -j | jq '.id')
 if [ $((workspaceId % 2)) -eq 0 ]
 then
-	if [ $(cat /sys/class/drm/card1-HDMI-A-2/status) == "connected" ]
+	if [ $(cat /sys/class/drm/card1-VGA-1/status) == "connected" ]
 	then
-		hyprctl dispatch workspace $((nextDesktop*2-1))
+		hyprctl dispatch "hl.dsp.focus({ workspace = $((nextDesktop*2-1)) })"
 	fi
 
-	hyprctl dispatch workspace $((nextDesktop*2))
+	hyprctl dispatch "hl.dsp.focus({ workspace = $((nextDesktop*2)) })"
 else
-	if [ $(cat /sys/class/drm/card1-HDMI-A-2/status) == "connected" ]
+	if [ $(cat /sys/class/drm/card1-VGA-1/status) == "connected" ]
 	then
-		hyprctl dispatch workspace $((nextDesktop*2))
+		hyprctl dispatch "hl.dsp.focus({ workspace = $((nextDesktop*2)) })"
 	fi
 
-	hyprctl dispatch workspace $((nextDesktop*2-1))
+	hyprctl dispatch "hl.dsp.focus({ workspace = $((nextDesktop*2-1)) })"
 fi
 
 
-echo currentDesktop=$((nextDesktop)) > ~/.local/state/currentDesktop.var
 
 exit 0
