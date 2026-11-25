@@ -100,35 +100,25 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export SUDO_EDITOR=nvim
-export VISUAL=nvim
-export EDITOR=nvim
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
-
+export SUDO_EDITOR=nvim
+export VISUAL=nvim
+export EDITOR=nvim
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias gcc="gcc -fno-stack-protector"
+
 
 alias vim="nvim"
 alias open="xdg-open"
 alias obsidian-open="xdg-open 'obsidian://open?path=$(pwd)'"
 alias tmp="nvim /tmp/$(date +%F).md"
-alias wilt="nvim ~/Obsidian/notes/$(date +%F).md"
+alias wilt="nvim ~/Obsidian/notes/WILT/$(date +%F).md"
 alias gcc="gcc -Wall -Wextra -Wpedantic"
 alias remove-orphans="sudo pacman -Qdtq | sudo pacman -Rns -"
 alias governor="cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
@@ -143,8 +133,8 @@ alias yay="yay --answerclean None --answerdiff None"
 alias vpn-up="sudo wg-quick up wg0"
 alias vpn-down="sudo wg-quick down wg0"
 alias tkill="tmux kill-server"
+alias talt="tmux -L alt"
 alias tstart='for i in {1..5}; do tmux new-session -d -s "$(generate_name)"; done && tmux attach'
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -164,7 +154,7 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
-
+setopt extended_glob
 #source /usr/share/nvm/init-nvm.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
