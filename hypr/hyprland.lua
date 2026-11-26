@@ -15,7 +15,7 @@ hl.monitor({
     mode     = "preferred@highrr",
     position = "1920x0",
     scale    = 1,
-    transform = 1,
+    transform = 3,
 })
 
 --monitor=Unknown-1,disable
@@ -233,20 +233,13 @@ hl.bind(settings.modB .. " + " .. 3, hl.dsp.window.move({ workspace = 5 , follow
 hl.bind(settings.modB .. " + " .. 4, hl.dsp.window.move({ workspace = 7 , follow = false}))
 
 -- virtual desktops
-
 hl.bind(settings.modB .. " + " .. "O", hl.dsp.exec_cmd("~/.local/bin/switch_desktops.sh 1"))
-
 hl.bind(settings.modB .. " + " .. "I", hl.dsp.exec_cmd("~/.local/bin/switch_desktops.sh -1"))
-
 hl.bind(settings.modA .. " + " .. "O", hl.dsp.exec_cmd("~/.local/bin/switch_desktops.sh 1"))
-
 hl.bind(settings.modA .. " + " .. "I", hl.dsp.exec_cmd("~/.local/bin/switch_desktops.sh -1"))
 
--- TODO: manual review (unknown dispatcher: swapactiveworkspaces)
--- hl.bind(settings.modA .. " + " .. "BACKSLASH", hl.dsp.swapactiveworkspaces(settings.monitorA .. " " .. settings.monitorB))
-
--- TODO: manual review (unknown dispatcher: swapactiveworkspaces)
--- hl.bind(settings.modB .. " + " .. "BACKSLASH", hl.dsp.swapactiveworkspaces(settings.monitorA .. " " .. settings.monitorB))
+hl.bind(settings.modA .. " + " .. "BACKSLASH", hl.dsp.workspace.swap_monitors({monitor1 = settings.monitorA, monitor2 = settings.monitorB } ))
+hl.bind(settings.modB .. " + " .. "BACKSLASH", hl.dsp.workspace.swap_monitors({monitor1 = settings.monitorA, monitor2 = settings.monitorB } ))
 
 -- lock
 
@@ -259,6 +252,7 @@ hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }))
 
 -- TODO: manual review (unknown dispatcher: Reveal active window on top)
 -- hl.bind("ALT + SHIFT + Tab", hl.dsp.Reveal active window on top("bringactivetotop"))
+
 
 hl.bind("F11", hl.dsp.window.fullscreen())
 
@@ -293,12 +287,14 @@ hl.bind(settings.modB .. " + " .. "K", hl.dsp.window.resize({ x = 40, y = 0, rel
 
 hl.bind(settings.modB .. " + " .. "J", hl.dsp.window.resize({ x = -40, y = 0, relative = true}), {repeating = true})
 
-hl.bind(settings.mainMod .. " + " .. "B", hl.dsp.window.swap({ next = true }))
+hl.bind(settings.modA .. " + " .. "B", hl.dsp.window.swap({ next = true }))
+hl.bind(settings.modB .. " + " .. "B", hl.dsp.window.swap({ next = true }))
+
 hl.bind("XF86Launch1", hl.dsp.exec_cmd("playerctl --player=spotify play-pause"))
 
 -- rofi
 
-hl.bind(settings.mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("~/.local/bin/launch_rofi.sh"))
+hl.bind(settings.mainMod .. " + " .. "SPACE", hl.dsp.exec_cmd("rofi -show drun -theme $HOME/.config/rofi/launcher/style.rasi"))
 
 -- powermenu
 
@@ -308,19 +304,19 @@ hl.bind(settings.mainMod .. " + " .. 1, hl.dsp.window.move({ monitor = settings.
 
 hl.bind(settings.mainMod .. " + " .. 2, hl.dsp.window.move({ monitor = settings.monitorB }))
 
-hl.bind(settings.mainMod .. " + " .. "O", hl.dsp.exec_cmd("hyprctl dispatch focusmonitor " .. settings.monitorA .. " && hyprctl dispatch focusmonitor " .. settings.monitorB))
+hl.bind(settings.mainMod .. " + " .. "O", hl.dsp.focus({ monitor = settings.monitorB }))
 
-hl.bind(settings.mainMod .. " + " .. "I", hl.dsp.exec_cmd("hyprctl dispatch focusmonitor " .. settings.monitorB .. " && hyprctl dispatch focusmonitor " .. settings.monitorA))
+hl.bind(settings.mainMod .. " + " .. "I", hl.dsp.focus({ monitor = settings.monitorA}))
 
 -- media control
 
-hl.bind(settings.modA .. " + " .. "D", hl.dsp.exec_cmd("playerctl --player=spotify play-pause"))
+hl.bind(settings.modA .. " + " .. "P", hl.dsp.exec_cmd("playerctl --player=spotify play-pause"))
 
 hl.bind(settings.modA .. " + " .. "E", hl.dsp.exec_cmd("playerctl --player=spotify previous"))
 
 hl.bind(settings.modA .. " + " .. "R", hl.dsp.exec_cmd("playerctl --player=spotify next"))
 
-hl.bind(settings.modB .. " + " .. "D", hl.dsp.exec_cmd("playerctl --player=spotify play-pause"))
+hl.bind(settings.modB .. " + " .. "P", hl.dsp.exec_cmd("playerctl --player=spotify play-pause"))
 
 hl.bind(settings.modB .. " + " .. "E", hl.dsp.exec_cmd("playerctl --player=spotify previous"))
 
@@ -342,17 +338,17 @@ hl.bind(settings.modB .. " + " .. "R", hl.dsp.exec_cmd("playerctl --player=spoti
 
 -- audio control
 
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("swayosd-client --output-volume raise --monitor " .. settings.monitorA ))
 
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("swayosd-client --output-volume lower --monitor " .. settings.monitorA))
 
-hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"))
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle --monitor " .. settings.monitorA))
 
-hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"))
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle --monitor " .. settings.monitorA))
 
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness raise"))
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("swayosd-client --brightness raise --monitor " .. settings.monitorA))
 
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower"))
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("swayosd-client --brightness lower --monitor " .. settings.monitorA))
 
 -- handle lid open and close
 
@@ -393,7 +389,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("dunst")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
-    hl.exec_cmd("swayosd-server --display=" .. settings.monitorA)
+    hl.exec_cmd("swayosd-server --style ~/.config/swayosd/style.css")
     hl.exec_cmd("source ~/.zshrc")
     hl.exec_cmd("XDG_MENU_PREFIX=arch- kbuildsycoca6")
     hl.exec_cmd("sway-audio-idle-inhibit")
